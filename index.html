@@ -81,7 +81,7 @@
     @media (max-width: 720px){.grid.cols-2,.grid.cols-3{grid-template-columns:1fr}}
     /* People */
     .person{display:flex; gap:16px; align-items:flex-start}
-    .avatar{width:128px; height:128px; border-radius:14px; background:linear-gradient(135deg, #2b59ff, #0ea5a5)}
+    .avatar {width: 128px; height: 128px; border-radius: 14px; object-fit: cover;     /* maintains aspect ratio, crops edges */ object-position: center; /* centers the subject */ display: block;        /* prevents inline spacing issues */}
     /* Publications */
     .pub{display:flex; gap:14px}
     .pub .dot{width:8px; height:8px; border-radius:50%; background:var(--accent); position:relative; top:.6em}
