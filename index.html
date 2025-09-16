@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Molecular Epidemiology & Evolutionary Genetics Lab — Dr. Jeffrey B. Joy</title>
+  <meta name="description" content="Research at the intersection of molecular epidemiology, evolutionary genetics, and public health. Led by Dr. Jeffrey B. Joy (UBC / BC‑CfE)." />
+  <meta property="og:title" content="MEEG Lab — Dr. Jeffrey B. Joy" />
+  <meta property="og:description" content="Molecular epidemiology, virus evolution, and public‑health facing genomics." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/assets/og-image.jpg" />
+  <meta property="og:url" content="https://example.org" />
+  <link rel="icon" href="/favicon.ico" />
+  <style>
+    :root{
+      --bg: #0b1020;
+      --panel:#0f1630;
+      --ink: #e9eefc;
+      --muted:#aab3d9;
+      --accent:#7aa2ff;
+      --accent-2:#4de1c1;
+      --border:#1b2446;
+      --ring:#2a60ff;
+      --ok:#3ddc97;
+      --warn:#ffd166;
+    }
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg:#f7f9ff; --panel:#ffffff; --ink:#0c1424; --muted:#4b587a; --border:#e6ebff; --accent:#2b59ff; --accent-2:#0ea5a5; --ring:#3b82f6;
+      }
+    }
+    html,body{height:100%}
+    *{box-sizing:border-box}
+    body{
+      margin:0; background:radial-gradient(1200px 600px at 80% -10%, rgba(122,162,255,.25), transparent 60%),
+      radial-gradient(900px 500px at -10% -20%, rgba(77,225,193,.15), transparent 60%), var(--bg);
+      color:var(--ink); font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Inter, Helvetica, Arial, Apple Color Emoji, Segoe UI Emoji;
+    }
+    a{color:var(--accent)}
+    .container{width:min(1100px, 92%); margin-inline:auto}
+    .shadow{box-shadow:0 10px 30px rgba(0,0,0,.25)}
+    header{position:sticky; top:0; z-index:50; backdrop-filter:saturate(140%) blur(8px); background:#cc5500; border-bottom:1px solid var(--border)}
+    .nav{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:12px 0}
+    .brand{display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--ink)}
+    .brand .logo{width:36px; height:36px; border-radius:10px; background:linear-gradient(135deg, var(--accent), var(--accent-2)); display:grid; place-items:center; font-weight:700; color:white}
+    .brand h1{font-size:16px; margin:0}
+    nav ul{list-style:none; display:flex; gap:18px; padding:0; margin:0}
+    nav a{color:var(--ink); text-decoration:none; padding:8px 10px; border-radius:10px}
+    nav a:hover, nav a:focus{outline:none; background:rgba(122,162,255,.12)}
+    .menu-btn{display:none; background:none; border:1px solid var(--border); color:var(--ink); padding:6px 10px; border-radius:10px}
+    @media (max-width: 840px){
+      nav ul{display:none}
+      .menu-btn{display:inline-flex}
+      .mobile-menu{display:none; position:absolute; inset:60px 0 auto 0; background:var(--panel); border-bottom:1px solid var(--border)}
+      .mobile-menu a{display:block; padding:14px 24px; color:var(--ink); text-decoration:none; border-top:1px solid var(--border)}
+      .mobile-menu a:hover{background:rgba(122,162,255,.12)}
+    }
+    /* Hero */
+    .hero{padding:72px 0 56px;}
+    .hero .eyebrow{color:var(--muted); letter-spacing:.08em; text-transform:uppercase; font-weight:600}
+    .hero h2{font-size: clamp(24px, 4vw, 38px); line-height:1.15; margin:.2em 0 .4em}
+    .hero p{font-size: clamp(16px, 2.6vw, 20px); color:var(--muted); max-width:65ch}
+    .cta{display:flex; gap:12px; flex-wrap:wrap; margin-top:22px}
+    .btn{display:inline-flex; align-items:center; gap:10px; border:1px solid var(--border); padding:10px 14px; border-radius:12px; text-decoration:none; color:var(--ink); background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(0,0,0,.03))}
+    .btn.primary{border-color:transparent; background:linear-gradient(135deg, var(--accent), var(--accent-2)); color:#fff}
+    .btn:hover{transform:translateY(-1px)}
+    /* Sections */
+    section{padding:20px 0; scroll-margin-top:72px}
+    .section-h{font-size: clamp(22px, 3.2vw, 30px); margin:0 0 6px}
+    .section-sub{color:var(--muted); margin:0 0 24px}
+    .grid{display:grid; gap:18px}
+    .grid.cols-2{grid-template-columns: repeat(2, minmax(0,1fr))}
+    .grid.cols-3{grid-template-columns: repeat(3, minmax(0,1fr))}
+    .card{background:var(--panel); border:1px solid var(--border); border-radius:16px; padding:18px}
+    .badge{display:inline-block; font-size:12px; padding:4px 8px; border-radius:999px; background:#006400; color:#d6e3ff; border:1px solid var(--border)}
+    .muted{color:var(--muted)}
+    @media (max-width: 960px){.grid.cols-3{grid-template-columns:1fr 1fr}}
+    @media (max-width: 720px){.grid.cols-2,.grid.cols-3{grid-template-columns:1fr}}
+    /* People */
+    .person{display:flex; gap:16px; align-items:flex-start}
+    .avatar{width:128px; height:128px; border-radius:14px; background:linear-gradient(135deg, #2b59ff, #0ea5a5)}
+    /* Publications */
+    .pub{display:flex; gap:14px}
+    .pub .dot{width:8px; height:8px; border-radius:50%; background:var(--accent); position:relative; top:.6em}
+    
+    /* Funding logos */
+    .logo-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px; /* space around logo */
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+}
+
+.logo-card img {
+  max-width: 100%;
+  max-height: 80px; /* keeps logos balanced */
+  object-fit: contain;
+}
+
+    .hero {
+  position: relative;
+  padding: 72px 0 56px;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url('/Users/jeffrey/Desktop/JoyLab_Website/images/background.png') top center/cover no-repeat;
+  opacity: 0.15; /* adjust transparency */
+  z-index: 0;
+}
+
+.hero * {
+  position: relative;
+  z-index: 1; /* keep text above the background */
+}
+
+    /* Footer */
+    footer{padding:40px 0; border-top:1px solid var(--border); background:rgba(10,16,32,.35)}
+    .foot{display:flex; gap:18px; flex-wrap:wrap; align-items:center; justify-content:space-between}
+    .small{font-size:13px}
+    .skip{position:absolute; left:-9999px}
+    .skip:focus{left:12px; top:12px; z-index:100; background:var(--panel); color:var(--ink); padding:8px 12px; border-radius:10px; border:1px solid var(--border)}
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="shadow" role="banner" aria-label="Primary">
+    <div class="container nav">
+      <a class="brand" href="#" aria-label="MEEG Lab home">
+        <img class="logo" src="/Users/jeffrey/Desktop/JoyLab_Website/images/Joy_Lab_Logo.png" alt="Joy Lab Logo">
+        <h1>Joy Lab — MEEG</h1>
+      </a>
+      <nav aria-label="Main">
+        <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mobileMenu">Menu</button>
+        <ul>
+          <li><a href="#research">Research</a></li>
+          <li><a href="#people">People</a></li>
+          <li><a href="#publications">Publications</a></li>
+          <li><a href="#opps">Opportunities</a></li>
+          <li><a href="#collab">Collaborations</a></li>
+          <li><a href="#news">News</a></li>
+          <li><a href="#support">Support</a></li>
+          <li><a href="#alumni">Alumni</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero container" aria-label="Hero">
+      <div class="badge">BC‑CfE & UBC</div>
+      <h2>Joy Lab - Molecular Epidemiology & Evolutionary Genetics</h2>
+      <p>
+        We study how pathogens evolve and spread, and translate those insights into public‑health impact.
+        We integrate evolutionary theory, genomics, phylogenetics, computational biology, and epidemiology - particularly for HIV, HCV, SARS-CoV-2, influenza, Lassa virus
+        and other emerging viruses—led by <strong>Dr. Jeffrey B. Joy</strong>.
+      </p>
+      <div class="cta">
+        <a class="btn primary" href="#publications">View Publications</a>
+        <a class="btn" href="#opps">Opportunities</a>
+        <a class="btn" href="#collab">Collaborate</a>
+      </div>
+    </section>
+
+    <section id="research" class="container" aria-labelledby="research-h">
+      <h3 id="research-h" class="section-h">Research</h3>
+      <p class="section-sub">Themes at the intersection of evolution, genomics, and public health. We use and develop evolutionary genetic methods to study and understand evolutionary processes in the context of molecular epidemiology, pathogen evolution, and macroevolution. Our laboratory integrates evolutionary theory and computational methods with genomic, clinical and socio-demographic attribute data to make inferences relevant to public health and clinical practice, as well as for the fields of evolutionary biology and molecular epidemiology more generally.</p>
+      <div class="grid cols-3">
+        <div class="card"><h4>Emergence & Spillover</h4><p class="muted">Understanding the emergence of novel pathogens (e.g., SARS‑CoV‑2, Lassa, H5N1), host jumps, and determinants of spillover risk.</p></div>
+        <div class="card"><h4>Transmission Dynamics</h4><p class="muted">Quantifying epidemic spread in HIV, HCV, influenza and others using phylodynamics and linked clinical data.</p></div>
+        <div class="card"><h4>Real‑time Outbreak Response</h4><p class="muted">Developing tools to prioritize public‑health action in near‑real time using sequence‑based surveillance, especially for HIV.</p></div>
+        <div class="card"><h4>Within‑host Evolution</h4><p class="muted">Dynamics, drivers, and consequences of within‑host variation and treatment response. Including dynamics and evolution of HIV cellular reservoirs.</p></div>
+        <div class="card"><h4>Policy & Interventions</h4><p class="muted">Evaluating impacts of interventions (e.g., PrEP, TasP, travel policies) on transmission and feedback for programmatic improvements.</p></div>
+        <div class="card"><h4>Modelling and Methods Development</h4><p class="muted">Novel algorithms for analyzing sequence data and epidemic dynamics at scale, typically through use or integration of genomic sequence data.</p></div>
+      </div>
+    </section>
+
+<section id="people" class="container" aria-labelledby="people-h">
+  <h3 id="people-h" class="section-h">People</h3>
+  <p class="section-sub">We are a collaborative team of researchers based at the BC Centre for Excellence in HIV/AIDS and in the Department of Medicine, Division of Infectious Diseases at the University of British Columbia, in Vancouver, Canada.</p>
+
+  <div class="card person">
+    <img class="avatar" src="/Users/jeffrey/Desktop/JoyLab_Website/images/jeffrey-joy.jpg" alt="Dr. Jeffrey B. Joy">
+    <div>
+      <h4 style="margin:0">Dr. Jeffrey B. Joy</h4>
+      <p class="muted" style="margin:.2em 0 .6em">Principal Investigator • Assistant Professor (UBC) • Senior Research Scientist (BC-CfE)</p>
+      <p class="muted">Interests: virus evolution, phylodynamics, sequence-based surveillance, public-health translation, emerging viruses.</p>
+    </div>
+  </div>
+
+  <div class="card person">
+    <img class="avatar" src="/Users/jeffrey/Desktop/JoyLab_Website/images/vincent-montoya.jpg" alt="Vincent Montoya">
+    <div>
+      <h4 style="margin:0">Vincent Montoya</h4>
+      <p class="muted" style="margin:.2em 0 .6em">Bioinformatician</p>
+      <p class="muted">Interests: virus evolution, phylodynamics, sequence-based surveillance, HCV, Influenza.</p>
+    </div>
+  </div>
+
+  <div class="card person">
+    <img class="avatar" src="/Users/jeffrey/Desktop/JoyLab_Website/images/giuli-sucar.jpg" alt="Giuli Sucar">
+    <div>
+      <h4 style="margin:0">Giuli Sucar</h4>
+      <p class="muted" style="margin:.2em 0 .6em">Graduate Student</p>
+      <p class="muted">Interests: application of machine learning to HIV public health, prediction of viral spillover, transgender health.</p>
+    </div>
+  </div>
+
+  <div class="card person">
+    <img class="avatar" src="/Users/jeffrey/Desktop/JoyLab_Website/images/kaytlyn-tasalloti.jpg" alt="Kaytlyn Tasalloti">
+    <div>
+      <h4 style="margin:0">Kaytlyn Tasalloti</h4>
+      <p class="muted" style="margin:.2em 0 .6em">Graduate Student</p>
+      <p class="muted">Interests: pathogen transmission, bacterial pathogens, salmon pathogens.</p>
+    </div>
+  </div>
+
+  <div class="card person">
+    <img class="avatar" src="/assets/people/julia-price.jpg" alt="Julia Price">
+    <div>
+      <h4 style="margin:0">Julia Price</h4>
+      <p class="muted" style="margin:.2em 0 .6em">Graduate Student</p>
+      <p class="muted">Interests: virus evolution, phylodynamics, and public health.</p>
+    </div>
+  </div>
+
+  <div class="card person">
+    <img class="avatar" src="/Users/jeffrey/Desktop/JoyLab_Website/images/amber-paulson.jpg" alt="Dr. Amber Paulson">
+    <div>
+      <h4 style="margin:0">Dr. Amber Paulson</h4>
+      <p class="muted" style="margin:.2em 0 .6em">Postdoctoral Fellow</p>
+      <p class="muted">Interests: svRNA, triplex forming oligonucleotides, host jumps, virus evolution.</p>
+    </div>
+  </div>
+
+  <div class="card person">
+    <img class="avatar" src="/Users/jeffrey/Desktop/JoyLab_Website/images/rowan-patterson.jpg" alt="Rowan Patterson">
+    <div>
+      <h4 style="margin:0">Rowan Patterson</h4>
+      <p class="muted" style="margin:.2em 0 .6em">Undergraduate Student</p>
+      <p class="muted">Interests: virus evolution, diversification, phylodynamics, sequence-based surveillance, Lassa virus.</p>
+    </div>
+  </div>
+</section>
+
+    <section id="publications" class="container" aria-labelledby="pubs-h">
+      <h3 id="pubs-h" class="section-h">Publications and Contributions</h3>
+      <p class="section-sub">Selected recent work. For a complete list, see Google Scholar.</p>
+      <div class="card">
+        <ul style="list-style:none; padding:0; margin:0; display:grid; gap:14px">
+          <li class="pub"><span class="dot" aria-hidden="true"></span>
+            <div>
+              <strong>Transmission Dynamics & Outbreak Response</strong> 
+              <div class="small muted">McLaughlin, A., J. Toy, V. Montoya, P. Sereda, J. Trigg, M. Hull, C. Brumme, R. Barrios, J.S.G. Montaner, and J.B. Joy. 2025. Impact of pre-exposure prophylaxis on HIV drug resistance and phylogenetic cluster growth. MedRxiv. • <a href="doi: https://doi.org/10.1101/2024.09.06.24313187">DOI</a></div>
+            </div>
+          </li>
+          <li class="pub"><span class="dot" aria-hidden="true"></span>
+            <div>
+              <strong>Within-host Evolution, Modelling & Methods Development</strong>
+              <div class="small muted">Jones, B.R. and J.B. Joy. 2023. Inferring human immunodeficiency virus 1 proviral integration dates with Bayesian inference. Molecular Biology and Evolution 40 (8):msad156. • <a href="https://doi.org/10.1093/molbev/msad156">DOI</a></div>
+            </div>
+          </li>
+          <li class="pub"><span class="dot" aria-hidden="true"></span>
+            <div>
+              <strong>Emergence & Spillover</strong>
+              <div class="small muted">Montoya V, McLaughlin A, Mordecai G, Miller R, Jones B, Joy J.B. 2021. Variable routes to genomic and host adaptation among coronaviruses. Journal of Evolutionary Biology 34:924-936. • <a href="https://doi.org/10.1111/jeb.13771">DOI</a>
+		     </div>
+		     <br>
+	         <div class="small muted">Pekar, J.E., T.P. Peacock, L. Moncla, P. Gangavarapu, D. Venkatesh, D.H. Goldhill, K. Gangavarapu, M.U.G. Kraemer, G. Dudas, J.B. Joy, C. Ruis, X. Ji, M. Chand, N. Groves, O.G. Pybus, A.L. Rasmussen, J.O. Wertheim, M.A. Suchard, A. Rambaut, K.G. Andersen, P. Lemey, and M. Worobey. 2025. Timing and molecular characterisation of the transmission to cattle of H5N1 influenza A virus genotype D1.1, clade 2.3.4.4b. Virological Post. • <a href="https://virological.org/t/timing-and-molecular-characterisation-of-the-transmission-to-cattle-ofh5n1-influenza-a-virus-genotype-d1-1-clade-2-3-4-4b/991">DOI</a></div>
+            </div>
+          </li>
+          <li class="pub"><span class="dot" aria-hidden="true"></span>
+            <div>
+              <strong>Policy & Interventions</strong> 
+              <div class="small muted">McLaughlin, A., V. Montoya, R. Miller, Canadian Covid-19 Genomics Network Consortium (CanCOGeN), M. Worobey, and J.B. Joy. 2025. Effectiveness of Canadian travel restrictions in reducing burden of SARS-CoV-2 variants of concern. medRxiv. • <a href="doi: https://doi.org/10.1101/2023.09.12.23294140">DOI</a></div>
+            </div>
+          </li>
+
+        </ul>
+        <div style="margin-top:16px; display:flex; gap:12px; flex-wrap:wrap">
+          <a class="btn" href="https://scholar.google.com/citations?hl=en&user=3DSEnCYAAAAJ&view_op=list_works&sortby=pubdate" target="_blank" rel="noopener">Google Scholar</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="opps" class="container" aria-labelledby="opps-h">
+      <h3 id="opps-h" class="section-h">Opportunities</h3>
+      <div class="grid cols-2">
+        <div class="card">
+          <h4>Graduate Students</h4>
+          <p class="muted">I welcome inquiries from prospective MSc and PhD students who have secured, or are in the process of applying for, external fellowship support (e.g., CIHR, NIH, NSERC, or comparable funding).</p>
+        </div>
+        <div class="card">
+          <h4>Postdoctoral Fellows</h4>
+          <p class="muted">I am open to discussions with prospective postdocs who hold fellowship funding (e.g., CIHR or NSERC PDF awards) or are actively developing proposals through national or international agencies (e.g., NIH, NSF, EU Horizon, or equivalent).</p>
+        </div>
+      </div>
+      <div class="card" style="margin-top:16px">
+        <p class="muted" style="margin:0">If these criteria apply to you, please email a CV and a brief cover letter outlining your research interests and career goals.</p>
+      </div>
+    </section>
+
+    <section id="collab" class="container" aria-labelledby="collab-h">
+      <h3 id="collab-h" class="section-h">Initiatives & Collaborations</h3>
+      <div class="card">
+        <p class="muted">We lead, develop, and run the CfE Canadian National HIV Phylogenetic Monitoring Initiative - a program to understand and assist with responding to HIV transmission in Canada.</p>
+        <p class="muted">We are actively interested in collaborative research with colleagues in Canada and internationally. We welcome opportunities that align with our themes, molecular epidemiology, evolutionary genetics, and public health, including joint analyses, co-supervision of trainees, and development of new methods and datasets.</p>
+        <p class="muted" style="margin:0">Collaborations include the Coronavirus Variants Rapid Response Network (CoVaRR-Net), the UBC PrePARE pandemic preparedness research cluster, and the Pan-Canadian H5N1 network, among others.</p> 
+        <p class="muted" >We routinely contribute to the International Dynamics and Evolution of Human Viruses Conference and will be hosting the 33rd meeting in 2026 at the UBC Okanagan Campus.     <a class="btn" href="https://dynamicsevolution.org/event/7/" target="_blank" rel="noopener">33rd International Dynamics and Evolution of Human Viruses Conference</a></p>
+      <div class="grid cols-3 logos">
+      <div class="card logo-card">
+      <img src="/Users/jeffrey/Desktop/JoyLab_Website/images/CoVaRR-Net_Logo-600.png" alt="CoVaRRNet logo">
+      </div>
+      <div class="card logo-card">
+      <img src="/Users/jeffrey/Desktop/JoyLab_Website/images/prepare-logo.png" alt="PrePARE logo">
+      </div>
+      <div class="card logo-card">
+      <img src="/Users/jeffrey/Desktop/JoyLab_Website/images/BC-CfE_HIV_Phylogenetic_Monitoring_Initiative_Logo_transparent.png" alt="CfE-PMI"> 
+      </div>
+      <!-- <div class="card logo-card">
+      <img src="/Users/jeffrey/Desktop/JoyLab_Website/images/nserc-logo.png" alt="NSERC logo">
+      </div>
+      <div class="card logo-card">
+      <img src="/Users/jeffrey/Desktop/JoyLab_Website/images/nih-logo.png" alt="NIH logo">
+      </div>
+      <div class="card logo-card">
+      <img src="/Users/jeffrey/Desktop/JoyLab_Website/images/phac-logo.png" alt="PHAC logo"> 
+      </div> -->  
+
+      </div>
+
+      </div>
+    </section>
+
+    <section id="news" class="container" aria-labelledby="news-h">
+      <h3 id="news-h" class="section-h">News & Events</h3>
+      <p class="section-sub">Highlights from conferences, workshops, media, and invited talks.</p>
+      <div class="grid cols-3">
+        <article class="card">
+          <div class="badge">2026</div>
+          <h4>Organizing: 33rd International Dynamics & Evolution of Human Viruses</h4>
+          <p class="muted">We are co-organizing the 33rd DEHV conference on the UBC Okanagan campus in Kelowna, BC, May 19th-22nd, 2026.</p> <a class="btn primary" href="https://dynamicsevolution.org/event/7/" target="_blank" rel="noopener">33rd International Dynamics and Evolution of Human Viruses Conference</a></p>
+        </article>
+        <article class="card">
+          <div class="badge">2025</div>
+          <h4>Co‑organized: Canadian Treatment as Prevention Summit</h4>
+          <p class="muted">Canadian summit to address rising HIV incidence, and raise the alarm about the threat that US cuts to HIV programs pose.</p> <a class="btn primary" href="https://bccfe.ca/events/canadian-treatment-as-prevention-summit-2025/" target="_blank" rel="noopener">BC-CfE 2025 Treatment as Prevention (TasP) Summit</a></p> 
+        </article>
+        <article class="card">
+          <div class="badge">2024</div>
+          <h4>Hosted: 31st International Dynamics & Evolution of Human Viruses Conference in Squamish, BC</h4>
+          <p class="muted">Program, abstracts, and details can be found at the below link.</p> <a class="btn primary" href="https://dynamicsevolution.org/event/2/" target="_blank" rel="noopener">31st International Dynamics and Evolution of Human Viruses Conference</a></p>
+        </article>
+      </div>
+    </section>
+    
+    <section id="support" class="container" aria-labelledby="news-h">
+      <h3 id="support-h" class="section-h">Funding & Support</h3>
+      <p class="section-sub">Funding and support for our work is provided by the BC Centre for Excellence in HIV/AIDS (BC-CfE), Genome British Columbia (Genome BC), the Public Health Agency of Canada (PHAC), Canadian Institutes for Health Research (CIHR), the National Sciences and Engineering Council of Canada (NSERC), the National Institutes of Health (NIH).</p>
+      <div class="grid cols-3 logos">
+      <div class="card logo-card">
+      <img src="/Users/jeffrey/Desktop/JoyLab_Website/images/bccfe-logo.png" alt="BC Centre for Excellence in HIV/AIDS logo">
+      </div>
+      <div class="card logo-card">
+      <img src="/Users/jeffrey/Desktop/JoyLab_Website/images/gbc-logo.png" alt="Genome BC logo">
+      </div>
+      <div class="card logo-card">
+      <img src="/Users/jeffrey/Desktop/JoyLab_Website/images/cihr-logo.png" alt="Canadian Institutes for Health Research logo">
+      </div>
+      <div class="card logo-card">
+      <img src="/Users/jeffrey/Desktop/JoyLab_Website/images/nserc-logo.png" alt="NSERC logo">
+      </div>
+      <div class="card logo-card">
+      <img src="/Users/jeffrey/Desktop/JoyLab_Website/images/nih-logo.png" alt="NIH logo">
+      </div>
+      <div class="card logo-card">
+      <img src="/Users/jeffrey/Desktop/JoyLab_Website/images/phac-logo.png" alt="PHAC logo">
+      </div>
+
+      </div>
+    </section>
+
+<section id="alumni" class="container" aria-labelledby="alumni-h">
+  <h3 id="alumni-h" class="section-h">Alumni</h3>
+  <p class="section-sub">Former graduate students, postdoctoral fellows, and research associates.</p>
+
+  <div class="card person">
+    <img class="avatar" src="/Users/jeffrey/Desktop/JoyLab_Website/images/angela-mclaughlin.jpg" alt="Dr. Angela McLaughlin">
+  <div>
+      <h4 style="margin:0">Dr. Angela McLaughlin</h4>
+      <p class="muted" style="margin:.2em 0 .6em">MSc & PhD</p>
+    </div>
+  </div>
+  
+  <div class="card person">
+    <img class="avatar" src="/Users/jeffrey/Desktop/JoyLab_Website/images/bradley-jones.jpg" alt="Dr. Bradley Jones">
+    <div>
+      <h4 style="margin:0">Dr. Bradley Jones</h4>
+      <p class="muted" style="margin:.2em 0 .6em">PhD</p>
+    </div>
+  </div>
+
+
+  <div class="card person">
+    <img class="avatar" src="/Users/jeffrey/Desktop/JoyLab_Website/images/rachel-miller.jpg" alt="Rachel Miller">
+    <div>
+      <h4 style="margin:0">Rachel Miller</h4>
+      <p class="muted" style="margin:.2em 0 .6em">MSc</p>
+    </div>
+  </div>
+
+  <div class="card person">
+    <img class="avatar" src="/Users/jeffrey/Desktop/JoyLab_Website/images/gideon-mordecai.png" alt="Dr. Gideon Mordecai">
+    <div>
+      <h4 style="margin:0">Dr. Gideon Mordecai</h4>
+      <p class="muted" style="margin:.2em 0 .6em">PDF</p>
+    </div>
+  </div>
+
+  <div class="card person">
+    <img class="avatar" src="/Users/jeffrey/Desktop/JoyLab_Website/images/bronwyn-neufeld.jpg" alt="Bronwyn Neufeld">
+    <div>
+      <h4 style="margin:0">Bronwyn Neufeld</h4>
+      <p class="muted" style="margin:.2em 0 .6em">Research Associate</p>
+    </div>
+  </div>
+
+  </div>
+</section>
+
+
+    <section id="contact" class="container" aria-labelledby="contact-h">
+      <h3 id="contact-h" class="section-h">Affiliation & Contact</h3>
+      <p class="section-sub">Our laboratory is part of the BC Centre for Excellence in HIV/AIDS and within the Division of Infectious Diseases, Department of Medicine, at the University of British Columbia (UBC). We are further affiliated with the UBC Bioinformatics Program and the UBC Genome Sciences and Technology Program.</p>
+
+      <div class="grid cols-2">
+        <div class="card">
+          <h4>Links</h4>
+          <ul class="muted" style="padding-left:18px">
+            <a class="btn" href="https://scholar.google.ca/citations?hl=en&user=3DSEnCYAAAAJ&view_op=list_works&sortby=pubdate" target="_blank" rel="noopener">Google Scholar</a>
+            <a class="btn" href="https://orcid.org/0000-0002-7013-1482" target="_blank" rel="noopener">ORCID</a>  
+            <a class="btn" href="https://pubmed.ncbi.nlm.nih.gov/?term=Joy+Jeffrey+B%5BAuthor%5D&sort=date&sort_order=desc" target="_blank" rel="noopener">PubMed</a>
+
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <div class="container foot">
+      <div class="small muted">© <span id="year"></span> MEEG Lab — Dr. Jeffrey B. Joy</div>
+      <div class="small muted">Designed for clarity, accessibility, and responsive display.</div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuBtn?.addEventListener('click', () => {
+      const open = mobileMenu.style.display === 'block';
+      mobileMenu.style.display = open ? 'none' : 'block';
+      menuBtn.setAttribute('aria-expanded', String(!open));
+    });
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
